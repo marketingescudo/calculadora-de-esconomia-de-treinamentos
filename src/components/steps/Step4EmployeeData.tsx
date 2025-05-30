@@ -11,7 +11,10 @@ export function Step4EmployeeData() {
   const { state, dispatch } = useCalculator();
 
   const handleSalaryChange = (value: string) => {
-    const numericValue = parseFloat(value.replace(/[^\d,]/g, '').replace(',', '.')) || 0;
+    // Remove all non-numeric characters except comma and period
+    const cleanValue = value.replace(/[^\d,]/g, '');
+    // Convert comma to period for calculation
+    const numericValue = parseFloat(cleanValue.replace(',', '.')) || 0;
     dispatch({ 
       type: 'SET_EMPLOYEE_DATA', 
       payload: { salary: numericValue }
@@ -30,6 +33,11 @@ export function Step4EmployeeData() {
       style: 'currency',
       currency: 'USD'
     }).format(value);
+  };
+
+  const formatInputValue = (value: number) => {
+    if (value === 0) return '';
+    return value.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   };
 
   const canProceed = state.employee.salary > 0;
@@ -56,13 +64,18 @@ export function Step4EmployeeData() {
               <Label htmlFor="employee-salary" className="text-escudo-dark font-medium">
                 Salário mensal base
               </Label>
-              <Input
-                id="employee-salary"
-                value={state.employee.salary > 0 ? formatCurrency(state.employee.salary) : ''}
-                onChange={(e) => handleSalaryChange(e.target.value)}
-                placeholder="R$ 5.000,00"
-                className="text-lg focus:ring-escudo-pink focus:border-escudo-pink"
-              />
+              <div className="relative">
+                <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-escudo-gray-600">
+                  R$
+                </span>
+                <Input
+                  id="employee-salary"
+                  value={formatInputValue(state.employee.salary)}
+                  onChange={(e) => handleSalaryChange(e.target.value)}
+                  placeholder="5.000,00"
+                  className="pl-10 text-lg focus:ring-escudo-pink focus:border-escudo-pink"
+                />
+              </div>
             </div>
 
             {state.employee.salary > 0 && (
