@@ -11,9 +11,9 @@ export function Step4EmployeeData() {
   const { state, dispatch } = useCalculator();
 
   const handleSalaryChange = (value: string) => {
-    // Remove all non-numeric characters except comma and period
-    const cleanValue = value.replace(/[^\d,]/g, '');
-    // Convert comma to period for calculation
+    // Allow only numbers, commas and periods
+    const cleanValue = value.replace(/[^\d,.]/g, '');
+    // Convert to number for calculation (handle both comma and period as decimal)
     const numericValue = parseFloat(cleanValue.replace(',', '.')) || 0;
     dispatch({ 
       type: 'SET_EMPLOYEE_DATA', 
@@ -33,11 +33,6 @@ export function Step4EmployeeData() {
       style: 'currency',
       currency: 'USD'
     }).format(value);
-  };
-
-  const formatInputValue = (value: number) => {
-    if (value === 0) return '';
-    return value.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   };
 
   const canProceed = state.employee.salary > 0;
@@ -70,9 +65,9 @@ export function Step4EmployeeData() {
                 </span>
                 <Input
                   id="employee-salary"
-                  value={formatInputValue(state.employee.salary)}
+                  value={state.employee.salary > 0 ? state.employee.salary.toString().replace('.', ',') : ''}
                   onChange={(e) => handleSalaryChange(e.target.value)}
-                  placeholder="5.000,00"
+                  placeholder="5000,00"
                   className="pl-10 text-lg focus:ring-escudo-pink focus:border-escudo-pink"
                 />
               </div>
