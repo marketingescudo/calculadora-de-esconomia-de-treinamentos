@@ -46,21 +46,21 @@ export function Step4EmployeeData() {
       <div className="space-y-6">
         <Card className="animate-fade-in">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-escudo-dark">
+            <CardTitle className="flex items-center gap-2 text-escudo-dark text-lg lg:text-xl">
               <User className="h-5 w-5 text-escudo-pink" />
               Salário do Colaborador
             </CardTitle>
-            <CardDescription>
+            <CardDescription className="text-sm lg:text-base">
               Defina o salário mensal base do colaborador
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="employee-salary" className="text-escudo-dark font-medium">
+              <Label htmlFor="employee-salary" className="text-escudo-dark font-medium text-sm lg:text-base">
                 Salário mensal base
               </Label>
               <div className="relative">
-                <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-escudo-gray-600">
+                <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-escudo-gray-600 text-sm lg:text-base">
                   R$
                 </span>
                 <Input
@@ -68,47 +68,47 @@ export function Step4EmployeeData() {
                   value={state.employee.salary > 0 ? state.employee.salary.toString().replace('.', ',') : ''}
                   onChange={(e) => handleSalaryChange(e.target.value)}
                   placeholder="5000,00"
-                  className="pl-10 text-lg focus:ring-escudo-pink focus:border-escudo-pink"
+                  className="pl-10 text-base lg:text-lg focus:ring-escudo-pink focus:border-escudo-pink"
                 />
               </div>
             </div>
 
             {state.employee.salary > 0 && (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-                <div className="p-4 bg-escudo-gray-50 rounded-lg">
+                <div className="p-3 lg:p-4 bg-escudo-gray-50 rounded-lg">
                   <div className="flex items-center gap-2 mb-2">
                     <Calculator className="h-4 w-4 text-escudo-pink" />
-                    <span className="font-medium text-escudo-dark">Impostos (70%)</span>
+                    <span className="font-medium text-escudo-dark text-sm lg:text-base">Impostos (70%)</span>
                   </div>
-                  <span className="text-xl font-bold text-escudo-dark">
+                  <span className="text-lg lg:text-xl font-bold text-escudo-dark">
                     {formatCurrency(state.employee.tax)}
                   </span>
                 </div>
 
-                <div className="p-4 bg-escudo-gray-50 rounded-lg">
+                <div className="p-3 lg:p-4 bg-escudo-gray-50 rounded-lg">
                   <div className="flex items-center gap-2 mb-2">
                     <DollarSign className="h-4 w-4 text-escudo-pink" />
-                    <span className="font-medium text-escudo-dark">Total</span>
+                    <span className="font-medium text-escudo-dark text-sm lg:text-base">Total</span>
                   </div>
-                  <span className="text-xl font-bold text-escudo-dark">
+                  <span className="text-lg lg:text-xl font-bold text-escudo-dark">
                     {formatCurrency(state.employee.total)}
                   </span>
                 </div>
 
-                <div className="p-4 bg-escudo-gray-50 rounded-lg">
+                <div className="p-3 lg:p-4 bg-escudo-gray-50 rounded-lg">
                   <div className="flex items-center gap-2 mb-2">
-                    <span className="font-medium text-escudo-dark">Custo por hora</span>
+                    <span className="font-medium text-escudo-dark text-sm lg:text-base">Custo por hora</span>
                   </div>
-                  <span className="text-xl font-bold text-escudo-pink">
+                  <span className="text-lg lg:text-xl font-bold text-escudo-pink">
                     {formatCurrency(state.employee.hourCost)}
                   </span>
                 </div>
 
-                <div className="p-4 bg-escudo-gray-50 rounded-lg">
+                <div className="p-3 lg:p-4 bg-escudo-gray-50 rounded-lg">
                   <div className="flex items-center gap-2 mb-2">
-                    <span className="font-medium text-escudo-dark">Custo total por hora</span>
+                    <span className="font-medium text-escudo-dark text-sm lg:text-base">Custo total por hora</span>
                   </div>
-                  <span className="text-xl font-bold text-escudo-pink">
+                  <span className="text-lg lg:text-xl font-bold text-escudo-pink">
                     {formatCurrency(state.totalEmployeeCost)}
                   </span>
                 </div>
@@ -119,33 +119,33 @@ export function Step4EmployeeData() {
 
         <Card className="animate-fade-in">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-escudo-dark">
+            <CardTitle className="flex items-center gap-2 text-escudo-dark text-lg lg:text-xl">
               <DollarSign className="h-5 w-5 text-escudo-pink" />
               Custo de Oportunidade
             </CardTitle>
-            <CardDescription>
+            <CardDescription className="text-sm lg:text-base">
               Calculado automaticamente com base na cotação do dólar
             </CardDescription>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="p-4 bg-escudo-gray-50 rounded-lg">
-                <div className="text-sm text-escudo-gray-600 mb-1">Base USD</div>
-                <div className="text-lg font-bold text-escudo-dark">
+              <div className="p-3 lg:p-4 bg-escudo-gray-50 rounded-lg">
+                <div className="text-xs lg:text-sm text-escudo-gray-600 mb-1">Base USD</div>
+                <div className="text-base lg:text-lg font-bold text-escudo-dark">
                   {formatUSD(state.opportunityCost.baseUSD)}
                 </div>
               </div>
 
-              <div className="p-4 bg-escudo-gray-50 rounded-lg">
-                <div className="text-sm text-escudo-gray-600 mb-1">Valor em BRL</div>
-                <div className="text-lg font-bold text-escudo-dark">
+              <div className="p-3 lg:p-4 bg-escudo-gray-50 rounded-lg">
+                <div className="text-xs lg:text-sm text-escudo-gray-600 mb-1">Valor em BRL</div>
+                <div className="text-base lg:text-lg font-bold text-escudo-dark">
                   {formatCurrency(state.opportunityCost.baseBRL)}
                 </div>
               </div>
 
-              <div className="p-4 bg-escudo-gray-50 rounded-lg">
-                <div className="text-sm text-escudo-gray-600 mb-1">Custo por hora</div>
-                <div className="text-lg font-bold text-escudo-pink">
+              <div className="p-3 lg:p-4 bg-escudo-gray-50 rounded-lg">
+                <div className="text-xs lg:text-sm text-escudo-gray-600 mb-1">Custo por hora</div>
+                <div className="text-base lg:text-lg font-bold text-escudo-pink">
                   {formatCurrency(state.opportunityCost.hourCost)}
                 </div>
               </div>

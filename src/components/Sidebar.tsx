@@ -1,8 +1,9 @@
 
-import React from 'react';
-import { Check, Circle, Play } from 'lucide-react';
+import React, { useState } from 'react';
+import { Check, Circle, Play, Menu, X } from 'lucide-react';
 import { useCalculator } from '@/contexts/CalculatorContext';
 import { StepStatus } from '@/types/calculator';
+import { Button } from '@/components/ui/button';
 
 const steps = [
   { id: 1, title: 'Introdução', description: 'Bem-vindo à calculadora' },
@@ -32,22 +33,38 @@ function StepIcon({ status }: { status: StepStatus }) {
 
 export function Sidebar() {
   const { state, dispatch } = useCalculator();
+  const [isOpen, setIsOpen] = useState(false);
   const progressPercentage = (state.completedSteps.size / steps.length) * 100;
 
   const handleStepClick = (stepId: number) => {
     if (state.completedSteps.has(stepId) || stepId === state.currentStep) {
       dispatch({ type: 'SET_CURRENT_STEP', payload: stepId });
+      setIsOpen(false); // Close mobile sidebar on navigation
     }
   };
 
-  return (
-    <div className="w-80 bg-white border-r border-escudo-gray-200 h-screen flex flex-col fixed left-0 top-0 z-10">
+  const SidebarContent = () => (
+    <>
       {/* Header */}
-      <div className="p-6 border-b border-escudo-gray-200 flex-shrink-0">
-        <h1 className="text-2xl font-bold text-escudo-dark">Calculadora Escudo</h1>
-        <p className="text-sm text-escudo-gray-600 mt-1">
-          Calcule sua economia com treinamentos EaD
-        </p>
+      <div className="p-4 lg:p-6 border-b border-escudo-gray-200 flex-shrink-0">
+        <div className="flex items-center justify-between lg:block">
+          <div>
+            <h1 className="text-xl lg:text-2xl font-bold text-escudo-dark">Calculadora Escudo</h1>
+            <p className="text-xs lg:text-sm text-escudo-gray-600 mt-1">
+              Calcule sua economia com treinamentos EaD
+            </p>
+          </div>
+          
+          {/* Mobile close button */}
+          <Button
+            variant="ghost"
+            size="sm"
+            className="lg:hidden"
+            onClick={() => setIsOpen(false)}
+          >
+            <X className="h-5 w-5" />
+          </Button>
+        </div>
         
         {/* Progress Bar */}
         <div className="mt-4">
@@ -65,7 +82,7 @@ export function Sidebar() {
       </div>
 
       {/* Steps */}
-      <div className="flex-1 overflow-y-auto p-4">
+      <div className="flex-1 overflow-y-auto p-3 lg:p-4">
         <div className="space-y-2">
           {steps.map((step) => {
             const status = getStepStatus(step.id, state.currentStep, state.completedSteps);
@@ -76,7 +93,7 @@ export function Sidebar() {
                 key={step.id}
                 onClick={() => handleStepClick(step.id)}
                 className={`
-                  flex items-center p-3 rounded-lg transition-all duration-200 cursor-pointer
+                  flex items-center p-2 lg:p-3 rounded-lg transition-all duration-200 cursor-pointer
                   ${status === 'current' ? 'bg-escudo-pink/10 border border-escudo-pink/20' : ''}
                   ${status === 'completed' ? 'bg-escudo-gray-50 hover:bg-escudo-gray-100' : ''}
                   ${status === 'pending' ? 'opacity-60 cursor-not-allowed' : ''}
@@ -84,7 +101,7 @@ export function Sidebar() {
                 `}
               >
                 <div className={`
-                  flex items-center justify-center w-8 h-8 rounded-full mr-3 transition-colors
+                  flex items-center justify-center w-7 h-7 lg:w-8 lg:h-8 rounded-full mr-2 lg:mr-3 transition-colors
                   ${status === 'completed' ? 'bg-green-500' : ''}
                   ${status === 'current' ? 'bg-escudo-pink' : ''}
                   ${status === 'pending' ? 'bg-escudo-gray-200' : ''}
@@ -92,15 +109,15 @@ export function Sidebar() {
                   <StepIcon status={status} />
                 </div>
                 
-                <div className="flex-1">
+                <div className="flex-1 min-w-0">
                   <h3 className={`
-                    font-semibold text-sm
+                    font-semibold text-sm lg:text-sm
                     ${status === 'current' ? 'text-escudo-pink' : 'text-escudo-dark'}
                     ${status === 'pending' ? 'text-escudo-gray-400' : ''}
                   `}>
                     {step.title}
                   </h3>
-                  <p className="text-xs text-escudo-gray-600 mt-0.5">
+                  <p className="text-xs text-escudo-gray-600 mt-0.5 truncate">
                     {step.description}
                   </p>
                 </div>
@@ -111,12 +128,48 @@ export function Sidebar() {
       </div>
 
       {/* Footer */}
-      <div className="p-4 border-t border-escudo-gray-200 flex-shrink-0">
+      <div className="p-3 lg:p-4 border-t border-escudo-gray-200 flex-shrink-0">
         <div className="text-center">
           <div className="text-xs text-escudo-gray-500">Powered by</div>
           <div className="text-sm font-bold text-escudo-dark">Escudo Treinamentos</div>
         </div>
       </div>
-    </div>
+    </>
+  );
+
+  return (
+    <>
+      {/* Mobile Menu Button */}
+      <Button
+        variant="ghost"
+        size="sm"
+        className="fixed top-4 left-4 z-50 lg:hidden bg-white shadow-md"
+        onClick={() => setIsOpen(true)}
+      >
+        <Menu className="h-5 w-5" />
+      </Button>
+
+      {/* Desktop Sidebar */}
+      <div className="hidden lg:flex w-80 bg-white border-r border-escudo-gray-200 h-screen flex-col fixed left-0 top-0 z-10">
+        <SidebarContent />
+      </div>
+
+      {/* Mobile Sidebar Overlay */}
+      {isOpen && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+          onClick={() => setIsOpen(false)}
+        />
+      )}
+
+      {/* Mobile Sidebar */}
+      <div className={`
+        fixed top-0 left-0 h-full w-80 max-w-[90vw] bg-white border-r border-escudo-gray-200 
+        flex flex-col z-50 lg:hidden transform transition-transform duration-300 ease-in-out
+        ${isOpen ? 'translate-x-0' : '-translate-x-full'}
+      `}>
+        <SidebarContent />
+      </div>
+    </>
   );
 }
