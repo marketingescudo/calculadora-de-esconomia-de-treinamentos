@@ -45,9 +45,9 @@ export function StepWrapper({
   };
 
   return (
-    <div className="flex-1 flex flex-col animate-slide-in-right">
+    <div className="flex-1 flex flex-col animate-slide-in-right ml-80">
       {/* Header */}
-      <div className="bg-white border-b border-escudo-gray-200 px-8 py-6">
+      <div className="bg-white border-b border-escudo-gray-200 px-8 py-6 flex-shrink-0">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-3xl font-bold text-escudo-dark mb-2">{title}</h1>
           {description && (
@@ -64,7 +64,7 @@ export function StepWrapper({
       </div>
 
       {/* Navigation */}
-      <div className="bg-white border-t border-escudo-gray-200 px-8 py-4">
+      <div className="bg-white border-t border-escudo-gray-200 px-8 py-4 flex-shrink-0">
         <div className="max-w-4xl mx-auto flex justify-between items-center">
           <div>
             {showBack && state.currentStep > 1 && (

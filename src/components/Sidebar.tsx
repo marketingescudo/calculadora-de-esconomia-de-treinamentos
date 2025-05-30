@@ -41,9 +41,9 @@ export function Sidebar() {
   };
 
   return (
-    <div className="w-80 bg-white border-r border-escudo-gray-200 h-screen flex flex-col">
+    <div className="w-80 bg-white border-r border-escudo-gray-200 h-screen flex flex-col fixed left-0 top-0 z-10">
       {/* Header */}
-      <div className="p-6 border-b border-escudo-gray-200">
+      <div className="p-6 border-b border-escudo-gray-200 flex-shrink-0">
         <h1 className="text-2xl font-bold text-escudo-dark">Calculadora Escudo</h1>
         <p className="text-sm text-escudo-gray-600 mt-1">
           Calcule sua economia com treinamentos EaD
@@ -111,7 +111,7 @@ export function Sidebar() {
       </div>
 
       {/* Footer */}
-      <div className="p-4 border-t border-escudo-gray-200">
+      <div className="p-4 border-t border-escudo-gray-200 flex-shrink-0">
         <div className="text-center">
           <div className="text-xs text-escudo-gray-500">Powered by</div>
           <div className="text-sm font-bold text-escudo-dark">Escudo Treinamentos</div>
