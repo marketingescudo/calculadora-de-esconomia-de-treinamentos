@@ -40,51 +40,51 @@ export function Step6Results() {
       <div className="space-y-6">
         {/* Economia Principal */}
         <Card className="border-escudo-pink/30 bg-gradient-to-r from-escudo-pink/10 to-escudo-pink/5 animate-celebration">
-          <CardHeader className="text-center">
-            <CardTitle className="flex items-center justify-center gap-2 text-3xl text-escudo-dark">
-              <TrendingDown className="h-8 w-8 text-escudo-pink" />
-              Sua Economia Anual
+          <CardHeader className="text-center px-3 sm:px-6">
+            <CardTitle className="flex flex-col sm:flex-row items-center justify-center gap-2 text-xl sm:text-2xl lg:text-3xl text-escudo-dark">
+              <TrendingDown className="h-6 w-6 sm:h-8 sm:w-8 text-escudo-pink flex-shrink-0" />
+              <span className="break-words">Sua Economia Anual</span>
             </CardTitle>
-            <CardDescription className="text-lg">
+            <CardDescription className="text-sm sm:text-base lg:text-lg">
               Com treinamentos SST EaD da Escudo
             </CardDescription>
           </CardHeader>
-          <CardContent className="text-center">
-            <div className="text-6xl font-bold text-escudo-pink mb-4 animate-pulse-glow">
+          <CardContent className="text-center px-3 sm:px-6">
+            <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-escudo-pink mb-4 animate-pulse-glow break-all">
               {formatCurrency(state.savings)}
             </div>
-            <div className="text-xl text-escudo-gray-600">
+            <div className="text-base sm:text-lg lg:text-xl text-escudo-gray-600 px-2">
               Economia de <span className="font-bold text-escudo-pink">{savingsPercentage}%</span> em custos de treinamento
             </div>
           </CardContent>
         </Card>
 
         {/* Comparativo Detalhado */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
           <Card className="border-red-200">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-red-600">
-                <BarChart3 className="h-5 w-5" />
-                Cenário Sem a Escudo
+            <CardHeader className="pb-3">
+              <CardTitle className="flex items-center gap-2 text-red-600 text-base sm:text-lg">
+                <BarChart3 className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
+                <span>Cenário Sem a Escudo</span>
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-3">
-              <div className="flex justify-between">
-                <span>Custo do instrutor:</span>
-                <span className="font-bold">{formatCurrency(state.instructor.total)}</span>
+            <CardContent className="space-y-2 sm:space-y-3 text-sm sm:text-base">
+              <div className="flex justify-between items-center">
+                <span className="text-escudo-gray-600">Custo do instrutor:</span>
+                <span className="font-bold break-all text-right ml-2">{formatCurrency(state.instructor.total)}</span>
               </div>
-              <div className="flex justify-between">
-                <span>Horas de treinamento:</span>
+              <div className="flex justify-between items-center">
+                <span className="text-escudo-gray-600">Horas de treinamento:</span>
                 <span className="font-bold">{state.trainingHours.withoutEscudo}h</span>
               </div>
-              <div className="flex justify-between">
-                <span>Custo por hora:</span>
-                <span className="font-bold">{formatCurrency(state.totalEmployeeCost)}</span>
+              <div className="flex justify-between items-center">
+                <span className="text-escudo-gray-600">Custo por hora:</span>
+                <span className="font-bold break-all text-right ml-2">{formatCurrency(state.totalEmployeeCost)}</span>
               </div>
-              <hr />
-              <div className="flex justify-between text-lg">
-                <span className="font-medium">Total anual:</span>
-                <span className="font-bold text-red-600">
+              <hr className="my-2" />
+              <div className="flex justify-between items-center text-base sm:text-lg">
+                <span className="font-medium text-escudo-gray-700">Total anual:</span>
+                <span className="font-bold text-red-600 break-all text-right ml-2">
                   {formatCurrency(state.trainingHours.totalCostWithoutEscudo)}
                 </span>
               </div>
@@ -92,29 +92,29 @@ export function Step6Results() {
           </Card>
 
           <Card className="border-green-200">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-green-600">
-                <CheckCircle className="h-5 w-5" />
-                Cenário Com a Escudo
+            <CardHeader className="pb-3">
+              <CardTitle className="flex items-center gap-2 text-green-600 text-base sm:text-lg">
+                <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
+                <span>Cenário Com a Escudo</span>
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-3">
-              <div className="flex justify-between">
-                <span>Redução de horas:</span>
+            <CardContent className="space-y-2 sm:space-y-3 text-sm sm:text-base">
+              <div className="flex justify-between items-center">
+                <span className="text-escudo-gray-600">Redução de horas:</span>
                 <span className="font-bold text-green-600">50%</span>
               </div>
-              <div className="flex justify-between">
-                <span>Horas de treinamento:</span>
+              <div className="flex justify-between items-center">
+                <span className="text-escudo-gray-600">Horas de treinamento:</span>
                 <span className="font-bold">{state.trainingHours.withEscudo}h</span>
               </div>
-              <div className="flex justify-between">
-                <span>Custo por hora:</span>
-                <span className="font-bold">{formatCurrency(state.totalEmployeeCost)}</span>
+              <div className="flex justify-between items-center">
+                <span className="text-escudo-gray-600">Custo por hora:</span>
+                <span className="font-bold break-all text-right ml-2">{formatCurrency(state.totalEmployeeCost)}</span>
               </div>
-              <hr />
-              <div className="flex justify-between text-lg">
-                <span className="font-medium">Total anual:</span>
-                <span className="font-bold text-green-600">
+              <hr className="my-2" />
+              <div className="flex justify-between items-center text-base sm:text-lg">
+                <span className="font-medium text-escudo-gray-700">Total anual:</span>
+                <span className="font-bold text-green-600 break-all text-right ml-2">
                   {formatCurrency(state.trainingHours.totalCostWithEscudo)}
                 </span>
               </div>
@@ -124,32 +124,33 @@ export function Step6Results() {
 
         {/* Resumo dos Dados */}
         <Card>
-          <CardHeader>
-            <CardTitle className="text-escudo-dark">Resumo dos Dados Utilizados</CardTitle>
+          <CardHeader className="pb-3">
+            <CardTitle className="text-escudo-dark text-base sm:text-lg">Resumo dos Dados Utilizados</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-              <div>
-                <div className="font-medium text-escudo-gray-600">Cotação USD/BRL</div>
-                <div className="text-lg font-bold">R$ {state.dollarRate.toFixed(2)}</div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 text-sm">
+              <div className="text-center sm:text-left">
+                <div className="font-medium text-escudo-gray-600 text-xs sm:text-sm">Cotação USD/BRL</div>
+                <div className="text-base sm:text-lg font-bold">R$ {state.dollarRate.toFixed(2)}</div>
               </div>
-              <div>
-                <div className="font-medium text-escudo-gray-600">Salário do colaborador</div>
-                <div className="text-lg font-bold">{formatCurrency(state.employee.salary)}</div>
+              <div className="text-center sm:text-left">
+                <div className="font-medium text-escudo-gray-600 text-xs sm:text-sm">Salário do colaborador</div>
+                <div className="text-base sm:text-lg font-bold break-all">{formatCurrency(state.employee.salary)}</div>
               </div>
-              <div>
-                <div className="font-medium text-escudo-gray-600">Custo do instrutor</div>
-                <div className="text-lg font-bold">{formatCurrency(state.instructor.base)}</div>
+              <div className="text-center sm:text-left sm:col-span-2 lg:col-span-1">
+                <div className="font-medium text-escudo-gray-600 text-xs sm:text-sm">Custo do instrutor</div>
+                <div className="text-base sm:text-lg font-bold break-all">{formatCurrency(state.instructor.base)}</div>
               </div>
             </div>
           </CardContent>
         </Card>
 
         {/* Ações */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
           <Button 
             onClick={handleDownloadReport}
-            className="bg-escudo-pink hover:bg-escudo-pink/90 flex items-center gap-2"
+            className="bg-escudo-pink hover:bg-escudo-pink/90 flex items-center gap-2 text-sm sm:text-base"
+            size="sm"
           >
             <Download className="h-4 w-4" />
             Baixar Relatório
@@ -157,16 +158,17 @@ export function Step6Results() {
           <Button 
             variant="outline" 
             onClick={handleRestart}
-            className="border-escudo-pink text-escudo-pink hover:bg-escudo-pink/10"
+            className="border-escudo-pink text-escudo-pink hover:bg-escudo-pink/10 text-sm sm:text-base"
+            size="sm"
           >
             Nova Simulação
           </Button>
         </div>
 
         {/* Logo da Escudo */}
-        <div className="text-center pt-8">
-          <div className="text-2xl font-bold text-escudo-dark">Escudo Treinamentos</div>
-          <div className="text-escudo-gray-600">Especialistas em SST EaD</div>
+        <div className="text-center pt-6 sm:pt-8">
+          <div className="text-xl sm:text-2xl font-bold text-escudo-dark">Escudo Treinamentos</div>
+          <div className="text-sm sm:text-base text-escudo-gray-600">Especialistas em SST EaD</div>
         </div>
       </div>
     </StepWrapper>
