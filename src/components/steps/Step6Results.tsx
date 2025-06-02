@@ -5,9 +5,14 @@ import { useCalculator } from '@/contexts/CalculatorContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { TrendingDown, CheckCircle, BarChart3, Download } from 'lucide-react';
+import { ReportGenerator } from '../ReportGenerator';
+import { EscudoLogo } from '../EscudoLogo';
+import { useToast } from '@/hooks/use-toast';
 
 export function Step6Results() {
   const { state } = useCalculator();
+  const { downloadReport } = ReportGenerator();
+  const { toast } = useToast();
 
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat('pt-BR', {
@@ -21,8 +26,21 @@ export function Step6Results() {
     : 0;
 
   const handleDownloadReport = () => {
-    // Implementar download do relatório
-    console.log('Download do relatório solicitado');
+    try {
+      downloadReport();
+      toast({
+        title: "✅ Relatório baixado com sucesso!",
+        description: "O arquivo HTML foi salvo em seus downloads.",
+        duration: 3000,
+      });
+    } catch (error) {
+      toast({
+        title: "❌ Erro ao baixar relatório",
+        description: "Tente novamente em alguns instantes.",
+        variant: "destructive",
+        duration: 3000,
+      });
+    }
   };
 
   const handleRestart = () => {
@@ -39,7 +57,7 @@ export function Step6Results() {
     >
       <div className="space-y-6">
         {/* Economia Principal */}
-        <Card className="border-escudo-pink/30 bg-gradient-to-r from-escudo-pink/10 to-escudo-pink/5 animate-celebration">
+        <Card className="border-escudo-pink/30 bg-gradient-to-r from-escudo-pink/10 to-escudo-pink/5 animate-celebration rounded-xl">
           <CardHeader className="text-center px-3 sm:px-6">
             <CardTitle className="flex flex-col sm:flex-row items-center justify-center gap-2 text-xl sm:text-2xl lg:text-3xl text-escudo-dark">
               <TrendingDown className="h-6 w-6 sm:h-8 sm:w-8 text-escudo-pink flex-shrink-0" />
@@ -49,7 +67,7 @@ export function Step6Results() {
               Com treinamentos SST EaD da Escudo
             </CardDescription>
           </CardHeader>
-          <CardContent className="text-center px-3 sm:px-6">
+          <CardContent className="text-center px-6 sm:px-8 py-8">
             <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-escudo-pink mb-4 animate-pulse-glow break-all">
               {formatCurrency(state.savings)}
             </div>
@@ -167,8 +185,8 @@ export function Step6Results() {
 
         {/* Logo da Escudo */}
         <div className="text-center pt-6 sm:pt-8">
-          <div className="text-xl sm:text-2xl font-bold text-escudo-dark">Escudo Treinamentos</div>
-          <div className="text-sm sm:text-base text-escudo-gray-600">Especialistas em SST EaD</div>
+          <EscudoLogo size="lg" className="mx-auto mb-2" />
+          <div className="text-xs sm:text-sm text-escudo-gray-500">Todos os direitos reservados</div>
         </div>
       </div>
     </StepWrapper>

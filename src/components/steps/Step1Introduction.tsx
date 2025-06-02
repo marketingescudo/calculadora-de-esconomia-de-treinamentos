@@ -72,8 +72,8 @@ export function Step1Introduction() {
           ))}
         </div>
 
-        {/* CTA Section */}
-        <div className="bg-gradient-to-r from-escudo-pink/5 to-escudo-dark/5 rounded-xl p-8 text-center">
+        {/* CTA Section - mudança de background */}
+        <div className="bg-escudo-pink/10 rounded-xl p-8 text-center">
           <h3 className="text-xl font-semibold text-escudo-dark mb-2">
             Pronto para começar?
           </h3>

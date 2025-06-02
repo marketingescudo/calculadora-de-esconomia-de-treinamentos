@@ -1,9 +1,9 @@
-
 import React, { useState } from 'react';
 import { Check, Circle, Play, Menu, X } from 'lucide-react';
 import { useCalculator } from '@/contexts/CalculatorContext';
 import { StepStatus } from '@/types/calculator';
 import { Button } from '@/components/ui/button';
+import { EscudoLogo } from './EscudoLogo';
 
 const steps = [
   { id: 1, title: 'Introdução', description: 'Bem-vindo à calculadora' },
@@ -49,7 +49,9 @@ export function Sidebar() {
       <div className="p-4 lg:p-6 border-b border-escudo-gray-200 flex-shrink-0">
         <div className="flex items-center justify-between lg:block">
           <div>
-            <h1 className="text-xl lg:text-2xl font-bold text-escudo-dark">Calculadora Escudo</h1>
+            <div className="flex items-center gap-3 mb-2">
+              <EscudoLogo size="md" />
+            </div>
             <p className="text-xs lg:text-sm text-escudo-gray-600 mt-1">
               Calcule sua economia com treinamentos EaD
             </p>
@@ -130,8 +132,7 @@ export function Sidebar() {
       {/* Footer */}
       <div className="p-3 lg:p-4 border-t border-escudo-gray-200 flex-shrink-0">
         <div className="text-center">
-          <div className="text-xs text-escudo-gray-500">Powered by</div>
-          <div className="text-sm font-bold text-escudo-dark">Escudo Treinamentos</div>
+          <div className="text-xs text-escudo-gray-500">Todos os direitos reservados</div>
         </div>
       </div>
     </>
