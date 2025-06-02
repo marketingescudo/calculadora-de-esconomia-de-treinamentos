@@ -3,7 +3,6 @@ import React from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
 
 interface StepWrapperProps {
   title: string;
@@ -27,27 +26,11 @@ export function StepWrapper({
   showNext = true,
   onBack,
   onNext,
-  currentStep = 1,
-  totalSteps = 6,
   isLoading = false,
   nextButtonText = 'Continuar'
 }: StepWrapperProps) {
-  const progress = (currentStep / totalSteps) * 100;
-
   return (
-    <div className="w-full max-w-4xl mx-auto space-y-6 pt-4 lg:pt-0">
-      {/* Progress Bar */}
-      <div className="space-y-2">
-        <div className="flex justify-between text-sm text-escudo-gray-600">
-          <span>Passo {currentStep} de {totalSteps}</span>
-          <span>{Math.round(progress)}% completo</span>
-        </div>
-        <Progress 
-          value={progress} 
-          className="h-2 bg-escudo-gray-200"
-        />
-      </div>
-
+    <div className="w-full max-w-5xl mx-auto space-y-6">
       {/* Main Content Card */}
       <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm">
         <CardHeader className="text-center space-y-4 pb-6">
