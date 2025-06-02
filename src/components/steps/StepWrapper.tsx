@@ -45,7 +45,7 @@ export function StepWrapper({
   const handleNext = () => {
     if (onNext) {
       onNext();
-    } else if (state.currentStep < 6) {
+    } else if (state.currentStep < 7) {
       dispatch({ type: 'COMPLETE_STEP', payload: state.currentStep });
       dispatch({ type: 'SET_CURRENT_STEP', payload: state.currentStep + 1 });
     }

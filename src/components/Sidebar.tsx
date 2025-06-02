@@ -7,12 +7,13 @@ import { Button } from '@/components/ui/button';
 import { EscudoLogo } from './EscudoLogo';
 
 const steps = [
-  { id: 1, title: 'Introdução', description: 'Bem-vindo à calculadora' },
-  { id: 2, title: 'Cotação Dólar', description: 'Configure a cotação atual' },
-  { id: 3, title: 'Dados Instrutor', description: 'Custo por turma' },
-  { id: 4, title: 'Dados Colaborador', description: 'Salário e impostos' },
-  { id: 5, title: 'Horas Treinamento', description: 'Compare cenários' },
-  { id: 6, title: 'Resultado', description: 'Sua economia calculada' }
+  { id: 1, title: 'Dados Pessoais', description: 'Nome e empresa' },
+  { id: 2, title: 'Introdução', description: 'Bem-vindo à calculadora' },
+  { id: 3, title: 'Cotação Dólar', description: 'Configure a cotação atual' },
+  { id: 4, title: 'Dados Instrutor', description: 'Custo por turma' },
+  { id: 5, title: 'Dados Colaborador', description: 'Salário e impostos' },
+  { id: 6, title: 'Horas Treinamento', description: 'Compare cenários' },
+  { id: 7, title: 'Resultado', description: 'Sua economia calculada' }
 ];
 
 function getStepStatus(stepId: number, currentStep: number, completedSteps: Set<number>): StepStatus {

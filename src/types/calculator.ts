@@ -25,12 +25,18 @@ export interface TrainingHoursData {
   totalCostWithEscudo: number;
 }
 
+export interface ParticipantData {
+  name: string;
+  company: string;
+}
+
 export interface CalculatorState {
   dollarRate: number;
   instructor: InstructorData;
   employee: EmployeeData;
   opportunityCost: OpportunityCostData;
   trainingHours: TrainingHoursData;
+  participant: ParticipantData;
   totalEmployeeCost: number;
   savings: number;
   currentStep: number;

@@ -23,7 +23,7 @@ export function ReportGenerator() {
       <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Relatório de Economia - Escudo Treinamentos</title>
+        <title>Relatório de Economia - ${state.participant.name} - ${state.participant.company}</title>
         <style>
           body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -47,6 +47,11 @@ export function ReportGenerator() {
             border-bottom: 3px solid #e30068;
             padding-bottom: 20px;
           }
+          .logo {
+            width: 120px;
+            height: auto;
+            margin-bottom: 20px;
+          }
           .header h1 {
             color: #e30068;
             font-size: 2.5rem;
@@ -57,6 +62,23 @@ export function ReportGenerator() {
             color: #80868b;
             font-size: 1.1rem;
             margin: 10px 0 0 0;
+          }
+          .participant-info {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+          }
+          .participant-info h2 {
+            color: #1a171b;
+            font-size: 1.3rem;
+            margin: 0 0 5px 0;
+          }
+          .participant-info p {
+            color: #80868b;
+            margin: 0;
+            font-size: 1rem;
           }
           .savings-highlight {
             background: linear-gradient(135deg, #e30068 0%, #c5005a 100%);
@@ -160,8 +182,14 @@ export function ReportGenerator() {
       <body>
         <div class="container">
           <div class="header">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==" alt="Escudo Logo" class="logo" />
             <h1>Relatório de Economia</h1>
             <p>Análise de Custos com Treinamentos SST EaD</p>
+          </div>
+
+          <div class="participant-info">
+            <h2>${state.participant.name}</h2>
+            <p>${state.participant.company}</p>
           </div>
 
           <div class="savings-highlight">
@@ -238,6 +266,7 @@ export function ReportGenerator() {
               hour: '2-digit',
               minute: '2-digit'
             })}</div>
+            <p>Relatório personalizado para ${state.participant.name} - ${state.participant.company}</p>
             <p>Todos os direitos reservados</p>
           </div>
         </div>
@@ -252,7 +281,7 @@ export function ReportGenerator() {
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `relatorio-economia-escudo-${new Date().toISOString().split('T')[0]}.html`;
+    link.download = `relatorio-economia-escudo-${state.participant.name.replace(/\s+/g, '-').toLowerCase()}-${new Date().toISOString().split('T')[0]}.html`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

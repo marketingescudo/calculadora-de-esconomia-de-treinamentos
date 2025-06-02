@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import { CalculatorState } from '@/types/calculator';
 
@@ -26,6 +25,10 @@ const initialState: CalculatorState = {
     totalCostWithoutEscudo: 0,
     totalCostWithEscudo: 0
   },
+  participant: {
+    name: '',
+    company: ''
+  },
   totalEmployeeCost: 0,
   savings: 0,
   currentStep: 1,
@@ -37,6 +40,7 @@ type CalculatorAction =
   | { type: 'SET_INSTRUCTOR_DATA'; payload: Partial<typeof initialState.instructor> }
   | { type: 'SET_EMPLOYEE_DATA'; payload: Partial<typeof initialState.employee> }
   | { type: 'SET_TRAINING_HOURS'; payload: number }
+  | { type: 'SET_PARTICIPANT_DATA'; payload: Partial<typeof initialState.participant> }
   | { type: 'SET_CURRENT_STEP'; payload: number }
   | { type: 'COMPLETE_STEP'; payload: number }
   | { type: 'RECALCULATE' };
@@ -66,6 +70,12 @@ function calculatorReducer(state: CalculatorState, action: CalculatorAction): Ca
           withoutEscudo: action.payload,
           withEscudo: action.payload / 2
         }
+      };
+    
+    case 'SET_PARTICIPANT_DATA':
+      return {
+        ...state,
+        participant: { ...state.participant, ...action.payload }
       };
     
     case 'SET_CURRENT_STEP':
