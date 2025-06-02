@@ -35,7 +35,7 @@ export function StepWrapper({
   const progress = (currentStep / totalSteps) * 100;
 
   return (
-    <div className="w-full max-w-4xl mx-auto space-y-6">
+    <div className="w-full max-w-4xl mx-auto space-y-6 pt-4 lg:pt-0">
       {/* Progress Bar */}
       <div className="space-y-2">
         <div className="flex justify-between text-sm text-escudo-gray-600">
