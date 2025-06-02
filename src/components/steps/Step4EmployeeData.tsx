@@ -1,5 +1,6 @@
 
-import React from 'react';
+
+import React, { useState } from 'react';
 import { StepWrapper } from './StepWrapper';
 import { useCalculator } from '@/contexts/CalculatorContext';
 import { Input } from '@/components/ui/input';
@@ -9,12 +10,14 @@ import { User, Calculator, DollarSign } from 'lucide-react';
 
 export function Step4EmployeeData() {
   const { state, dispatch } = useCalculator();
+  const [salaryInput, setSalaryInput] = useState(state.employee.salary > 0 ? state.employee.salary.toString() : '');
 
   const handleSalaryChange = (value: string) => {
-    // Allow only numbers, commas and periods
-    const cleanValue = value.replace(/[^\d,.]/g, '');
-    // Convert to number for calculation (handle both comma and period as decimal)
-    const numericValue = parseFloat(cleanValue.replace(',', '.')) || 0;
+    // Allow only numbers
+    const cleanValue = value.replace(/[^\d]/g, '');
+    setSalaryInput(cleanValue);
+    
+    const numericValue = parseFloat(cleanValue) || 0;
     dispatch({ 
       type: 'SET_EMPLOYEE_DATA', 
       payload: { salary: numericValue }
@@ -65,9 +68,9 @@ export function Step4EmployeeData() {
                 </span>
                 <Input
                   id="employee-salary"
-                  value={state.employee.salary > 0 ? state.employee.salary.toString().replace('.', ',') : ''}
+                  value={salaryInput}
                   onChange={(e) => handleSalaryChange(e.target.value)}
-                  placeholder="5000,00"
+                  placeholder="5000"
                   className="pl-10 text-base lg:text-lg focus:ring-escudo-pink focus:border-escudo-pink"
                 />
               </div>
@@ -156,3 +159,4 @@ export function Step4EmployeeData() {
     </StepWrapper>
   );
 }
+

@@ -1,5 +1,6 @@
 
-import React from 'react';
+
+import React, { useState } from 'react';
 import { StepWrapper } from './StepWrapper';
 import { useCalculator } from '@/contexts/CalculatorContext';
 import { Input } from '@/components/ui/input';
@@ -9,9 +10,15 @@ import { GraduationCap, Users } from 'lucide-react';
 
 export function Step3InstructorData() {
   const { state, dispatch } = useCalculator();
+  const [baseInput, setBaseInput] = useState(state.instructor.base > 0 ? state.instructor.base.toString() : '');
+  const [classCountInput, setClassCountInput] = useState(state.instructor.classCount > 0 ? state.instructor.classCount.toString() : '');
 
   const handleBaseChange = (value: string) => {
-    const numericValue = parseFloat(value.replace(/[^\d,]/g, '').replace(',', '.')) || 0;
+    // Allow only numbers
+    const cleanValue = value.replace(/[^\d]/g, '');
+    setBaseInput(cleanValue);
+    
+    const numericValue = parseFloat(cleanValue) || 0;
     dispatch({ 
       type: 'SET_INSTRUCTOR_DATA', 
       payload: { base: numericValue }
@@ -19,7 +26,11 @@ export function Step3InstructorData() {
   };
 
   const handleClassCountChange = (value: string) => {
-    const numericValue = parseInt(value) || 0;
+    // Allow only numbers
+    const cleanValue = value.replace(/[^\d]/g, '');
+    setClassCountInput(cleanValue);
+    
+    const numericValue = parseInt(cleanValue) || 0;
     dispatch({ 
       type: 'SET_INSTRUCTOR_DATA', 
       payload: { classCount: numericValue }
@@ -58,13 +69,18 @@ export function Step3InstructorData() {
                 <Label htmlFor="instructor-base" className="text-escudo-dark font-medium">
                   Custo base por turma
                 </Label>
-                <Input
-                  id="instructor-base"
-                  value={state.instructor.base > 0 ? formatCurrency(state.instructor.base) : ''}
-                  onChange={(e) => handleBaseChange(e.target.value)}
-                  placeholder="R$ 2.000,00"
-                  className="text-lg focus:ring-escudo-pink focus:border-escudo-pink"
-                />
+                <div className="relative">
+                  <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-escudo-gray-600">
+                    R$
+                  </span>
+                  <Input
+                    id="instructor-base"
+                    value={baseInput}
+                    onChange={(e) => handleBaseChange(e.target.value)}
+                    placeholder="2000"
+                    className="pl-10 text-lg focus:ring-escudo-pink focus:border-escudo-pink"
+                  />
+                </div>
               </div>
 
               <div className="space-y-2">
@@ -75,9 +91,7 @@ export function Step3InstructorData() {
                   <Users className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-escudo-gray-500" />
                   <Input
                     id="instructor-classes"
-                    type="number"
-                    min="1"
-                    value={state.instructor.classCount || ''}
+                    value={classCountInput}
                     onChange={(e) => handleClassCountChange(e.target.value)}
                     placeholder="1"
                     className="pl-10 text-lg focus:ring-escudo-pink focus:border-escudo-pink"
@@ -102,3 +116,4 @@ export function Step3InstructorData() {
     </StepWrapper>
   );
 }
+

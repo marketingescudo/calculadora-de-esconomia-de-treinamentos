@@ -1,5 +1,6 @@
 
-import React from 'react';
+
+import React, { useState } from 'react';
 import { StepWrapper } from './StepWrapper';
 import { useCalculator } from '@/contexts/CalculatorContext';
 import { Input } from '@/components/ui/input';
@@ -9,9 +10,14 @@ import { Clock, TrendingDown, Zap } from 'lucide-react';
 
 export function Step5TrainingHours() {
   const { state, dispatch } = useCalculator();
+  const [hoursInput, setHoursInput] = useState(state.trainingHours.withoutEscudo > 0 ? state.trainingHours.withoutEscudo.toString() : '');
 
   const handleHoursChange = (value: string) => {
-    const numericValue = parseFloat(value) || 0;
+    // Allow only numbers
+    const cleanValue = value.replace(/[^\d]/g, '');
+    setHoursInput(cleanValue);
+    
+    const numericValue = parseFloat(cleanValue) || 0;
     dispatch({ 
       type: 'SET_TRAINING_HOURS', 
       payload: numericValue
@@ -51,9 +57,7 @@ export function Step5TrainingHours() {
               </Label>
               <Input
                 id="training-hours"
-                type="number"
-                min="1"
-                value={state.trainingHours.withoutEscudo || ''}
+                value={hoursInput}
                 onChange={(e) => handleHoursChange(e.target.value)}
                 placeholder="40"
                 className="text-lg focus:ring-escudo-pink focus:border-escudo-pink"
@@ -134,3 +138,4 @@ export function Step5TrainingHours() {
     </StepWrapper>
   );
 }
+

@@ -1,4 +1,5 @@
 
+
 import React, { useEffect, useState } from 'react';
 import { DollarSign, RefreshCw, AlertCircle } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -11,7 +12,13 @@ import { toast } from '@/hooks/use-toast';
 export function Step2DollarRate() {
   const { state, dispatch } = useCalculator();
   const [loading, setLoading] = useState(false);
-  const [manualRate, setManualRate] = useState(state.dollarRate.toString());
+  const [manualRate, setManualRate] = useState('');
+
+  useEffect(() => {
+    if (state.dollarRate > 0 && !manualRate) {
+      setManualRate(state.dollarRate.toFixed(2));
+    }
+  }, [state.dollarRate]);
 
   const fetchDollarRate = async () => {
     setLoading(true);
@@ -58,9 +65,12 @@ export function Step2DollarRate() {
   };
 
   const handleManualChange = (value: string) => {
-    setManualRate(value);
-    const numValue = parseFloat(value.replace(',', '.'));
-    if (!isNaN(numValue)) {
+    // Allow only numbers, comma and period
+    const cleanValue = value.replace(/[^0-9,\.]/g, '');
+    setManualRate(cleanValue);
+    
+    const numValue = parseFloat(cleanValue.replace(',', '.'));
+    if (!isNaN(numValue) && numValue > 0) {
       dispatch({ type: 'SET_DOLLAR_RATE', payload: numValue });
     }
   };
@@ -168,3 +178,4 @@ export function Step2DollarRate() {
     </StepWrapper>
   );
 }
+
