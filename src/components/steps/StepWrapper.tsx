@@ -3,6 +3,7 @@ import React from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { useCalculator } from '@/contexts/CalculatorContext';
 
 interface StepWrapperProps {
   title: string;
@@ -16,6 +17,7 @@ interface StepWrapperProps {
   totalSteps?: number;
   isLoading?: boolean;
   nextButtonText?: string;
+  canProceed?: boolean;
 }
 
 export function StepWrapper({
@@ -27,8 +29,28 @@ export function StepWrapper({
   onBack,
   onNext,
   isLoading = false,
-  nextButtonText = 'Continuar'
+  nextButtonText = 'Continuar',
+  canProceed = true
 }: StepWrapperProps) {
+  const { state, dispatch } = useCalculator();
+
+  const handleBack = () => {
+    if (onBack) {
+      onBack();
+    } else if (state.currentStep > 1) {
+      dispatch({ type: 'SET_CURRENT_STEP', payload: state.currentStep - 1 });
+    }
+  };
+
+  const handleNext = () => {
+    if (onNext) {
+      onNext();
+    } else if (state.currentStep < 6) {
+      dispatch({ type: 'COMPLETE_STEP', payload: state.currentStep });
+      dispatch({ type: 'SET_CURRENT_STEP', payload: state.currentStep + 1 });
+    }
+  };
+
   return (
     <div className="w-full max-w-5xl mx-auto space-y-6">
       {/* Main Content Card */}
@@ -54,7 +76,7 @@ export function StepWrapper({
             {showBack ? (
               <Button
                 variant="outline"
-                onClick={onBack}
+                onClick={handleBack}
                 className="flex items-center space-x-2 hover:bg-escudo-gray-50"
               >
                 <ArrowLeft className="h-4 w-4" />
@@ -66,9 +88,9 @@ export function StepWrapper({
 
             {showNext && (
               <Button
-                onClick={onNext}
-                disabled={isLoading}
-                className="flex items-center space-x-2 bg-escudo-pink hover:bg-escudo-pink/90 text-white px-6"
+                onClick={handleNext}
+                disabled={isLoading || !canProceed}
+                className="flex items-center space-x-2 bg-escudo-pink hover:bg-escudo-pink/90 text-white px-6 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <span>{isLoading ? 'Processando...' : nextButtonText}</span>
                 {!isLoading && <ArrowRight className="h-4 w-4" />}
