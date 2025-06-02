@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { StepWrapper } from './StepWrapper';
 import { useCalculator } from '@/contexts/CalculatorContext';
@@ -35,13 +34,10 @@ export function Step4EmployeeData() {
     }).format(value);
   };
 
-  const canProceed = state.employee.salary > 0;
-
   return (
     <StepWrapper
       title="Dados do Colaborador"
       description="Configure as informações salariais e custos dos colaboradores"
-      canProceed={canProceed}
     >
       <div className="space-y-6">
         <Card className="animate-fade-in">

@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { DollarSign, RefreshCw, AlertCircle } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -85,7 +84,6 @@ export function Step2DollarRate() {
     <StepWrapper
       title="Cotação do Dólar"
       description="Precisamos da cotação atual para calcular o custo de oportunidade"
-      canProceed={state.dollarRate > 0}
     >
       <div className="space-y-6 animate-fade-in">
         <Card className="border-escudo-gray-200">

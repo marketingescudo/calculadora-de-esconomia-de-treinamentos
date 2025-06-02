@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { StepWrapper } from './StepWrapper';
 import { useCalculator } from '@/contexts/CalculatorContext';
@@ -33,13 +32,10 @@ export function Step3InstructorData() {
     }).format(value);
   };
 
-  const canProceed = state.instructor.base > 0 && state.instructor.classCount > 0;
-
   return (
     <StepWrapper
       title="Dados do Instrutor"
       description="Configure os custos relacionados ao instrutor"
-      canProceed={canProceed}
     >
       <div className="space-y-6">
         <Card className="animate-fade-in">

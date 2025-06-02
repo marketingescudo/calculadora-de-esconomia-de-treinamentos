@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { StepWrapper } from './StepWrapper';
 import { useCalculator } from '@/contexts/CalculatorContext';
@@ -31,7 +30,6 @@ export function Step5TrainingHours() {
     <StepWrapper
       title="Horas de Treinamento"
       description="Compare os cenários com e sem a Escudo"
-      canProceed={canProceed}
     >
       <div className="space-y-6">
         <Card className="animate-fade-in">
