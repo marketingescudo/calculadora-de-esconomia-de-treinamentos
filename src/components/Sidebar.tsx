@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Check, Circle, Play, Menu, X } from 'lucide-react';
 import { useCalculator } from '@/contexts/CalculatorContext';
@@ -23,11 +24,11 @@ function getStepStatus(stepId: number, currentStep: number, completedSteps: Set<
 function StepIcon({ status }: { status: StepStatus }) {
   switch (status) {
     case 'completed':
-      return <Check className="h-4 w-4 text-white" />;
+      return <Check className="h-3 w-3 text-white" />;
     case 'current':
-      return <Play className="h-4 w-4 text-white" />;
+      return <Play className="h-3 w-3 text-white" />;
     default:
-      return <Circle className="h-4 w-4 text-escudo-gray-400" />;
+      return <Circle className="h-3 w-3 text-escudo-gray-400" />;
   }
 }
 
@@ -50,7 +51,7 @@ export function Sidebar() {
         <div className="flex items-center justify-between lg:block">
           <div>
             <div className="flex items-center gap-3 mb-2">
-              <EscudoLogo size="md" />
+              <EscudoLogo size="sm" />
             </div>
             <p className="text-xs lg:text-sm text-escudo-gray-600 mt-1">
               Calcule sua economia com treinamentos EaD
@@ -103,7 +104,7 @@ export function Sidebar() {
                 `}
               >
                 <div className={`
-                  flex items-center justify-center w-7 h-7 lg:w-8 lg:h-8 rounded-full mr-2 lg:mr-3 transition-colors
+                  flex items-center justify-center w-6 h-6 lg:w-7 lg:h-7 rounded-full mr-2 lg:mr-3 transition-colors
                   ${status === 'completed' ? 'bg-green-500' : ''}
                   ${status === 'current' ? 'bg-escudo-pink' : ''}
                   ${status === 'pending' ? 'bg-escudo-gray-200' : ''}

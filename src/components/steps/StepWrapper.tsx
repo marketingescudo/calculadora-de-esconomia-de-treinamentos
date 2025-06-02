@@ -56,7 +56,7 @@ export function StepWrapper({
       {/* Main Content Card */}
       <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm">
         <CardHeader className="text-center space-y-4 pb-6">
-          <h1 className="text-2xl md:text-3xl font-bold text-escudo-dark">
+          <h1 className="text-2xl md:text-3xl font-bold text-escudo-dark mt-12 lg:mt-0">
             {title}
           </h1>
           {description && (

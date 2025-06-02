@@ -57,7 +57,7 @@ export function Step6Results() {
     >
       <div className="space-y-6">
         {/* Economia Principal */}
-        <Card className="border-escudo-pink/30 bg-gradient-to-r from-escudo-pink/10 to-escudo-pink/5 animate-celebration rounded-xl">
+        <Card className="border-escudo-pink/30 bg-gradient-to-r from-escudo-pink/10 to-escudo-pink/5 rounded-xl mt-4">
           <CardHeader className="text-center px-3 sm:px-6">
             <CardTitle className="flex flex-col sm:flex-row items-center justify-center gap-2 text-xl sm:text-2xl lg:text-3xl text-escudo-dark">
               <TrendingDown className="h-6 w-6 sm:h-8 sm:w-8 text-escudo-pink flex-shrink-0" />
@@ -67,8 +67,8 @@ export function Step6Results() {
               Com treinamentos SST EaD da Escudo
             </CardDescription>
           </CardHeader>
-          <CardContent className="text-center px-6 sm:px-8 py-8">
-            <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-escudo-pink mb-4 animate-pulse-glow break-all">
+          <CardContent className="text-center px-6 sm:px-8 py-4">
+            <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-escudo-pink mb-4 break-all">
               {formatCurrency(state.savings)}
             </div>
             <div className="text-base sm:text-lg lg:text-xl text-escudo-gray-600 px-2">
